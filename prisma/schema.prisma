@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Model for FAOSTAT dataset metadata
+// The updated list of datasets can be found at
+// https://fenixservices.fao.org/faostat/static/bulkdownloads/datasets_E.json
+model Dataset {
+  id                 Int      @id @default(autoincrement())
+  datasetCode        String   @unique
+  datasetName        String   @unique
+  topic              String?
+  datasetDescription String?
+  contact            String?
+  email              String?
+  dateUpdate         DateTime
+  compressionFormat  String
+  fileType           String
+  fileSize           String
+  fileRows           Int
+  fileLocation       String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
