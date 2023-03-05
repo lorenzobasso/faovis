@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 
-	import LinkBase from './LinkBase.svelte'
+	import LinkBase from './link-base.svelte'
 
 	export let href: string
 	export let additionalClass = ''

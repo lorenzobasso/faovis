@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ExternalLink from './ExternalLink.svelte'
-	import NavLink from './NavLink.svelte'
+	import ExternalLink from './external-link.svelte'
+	import NavLink from './nav-link.svelte'
 </script>
 
 <header class="flex justify-center my-4">

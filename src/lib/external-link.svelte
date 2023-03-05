@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ArrowTopRightOnSquare, Icon } from 'svelte-hero-icons'
 
-	import LinkBase from './LinkBase.svelte'
+	import LinkBase from './link-base.svelte'
 
 	export let href: string
 </script>
