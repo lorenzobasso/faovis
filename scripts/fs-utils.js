@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { parse } from 'csv-parse'
 import extract from 'extract-zip'
