@@ -1,34 +1,46 @@
 <script lang="ts">
 	import Chart from '$lib/chart.svelte'
 
+	import { SlideToggle } from '@skeletonlabs/skeleton'
+
 	import type { PageServerData } from './$types'
 
 	export let data: PageServerData
 
-	const co2EqByYear: echarts.EChartsOption = {
+	let smoothSeries = true
+
+	$: co2EqByYear = {
 		xAxis: {
 			type: 'category',
-			data: data.co2eqByYear.years,
+			data: data.co2eqByYear[0].years,
 		},
 		yAxis: {
 			type: 'value',
-			name: `Emissions (CO2eq) \n(${data.co2eqByYear.unit})`,
+			name: `Emissions (CO2eq) \n(${data.co2eqByYear[0].unit})`,
 		},
-		series: [
-			{
-				data: data.co2eqByYear.values.slice(0, -2),
-				type: 'line',
-				name: 'Emissions (CO2eq) (AR5)',
-				smooth: true,
-			},
-		],
+		series: data.co2eqByYear.map(dataset => ({
+			data: dataset.values,
+			type: 'line',
+			name: dataset.name,
+			smooth: smoothSeries,
+		})),
 		legend: {
-			data: ['Emissions (CO2eq) (AR5)'],
+			data: data.co2eqByYear.map(dataset => dataset.name),
 		},
-	}
+	} as echarts.EChartsOption
 </script>
 
-<div class="container h-full mx-auto flex flex-col justify-center items-center space-y-4">
-	<h3>Total CO2 equivalent emissions from all agricultural sectors</h3>
+<div class="container h-full mx-auto flex flex-col justify-center items-center">
+	<h3 class="mb-2">Total CO2 equivalent emissions from all agricultural sectors</h3>
+	<div class="self-start my-2">
+		<SlideToggle
+			size="sm"
+			name="smooth-series"
+			bind:checked={smoothSeries}
+			active="bg-primary-900 dark:bg-primary-700"
+		>
+			Smooth interpolation line
+		</SlideToggle>
+	</div>
 	<Chart options={co2EqByYear} />
 </div>
