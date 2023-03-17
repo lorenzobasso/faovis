@@ -8,7 +8,7 @@
 
 <div>
 	<Navbar />
-	<main class="max-w-4xl mx-auto">
-		<slot />
-	</main>
 </div>
+<main class="max-w-4xl mx-auto my-8 overflow-auto flex-1 w-full">
+	<slot />
+</main>
